@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.wzz.seccond.t_class.dao.InclassDao">
+    <insert id="addPublicInformation" parameterType="com.wzz.bean.PublicClass">
+        insert into public(cid,sclass,sub_daily_score,ave_daily_score,sub_last_score,ave_last_score,sub_all_score,ave_all_score)
+        value (#{cid},#{sclass},#{sub_daily_score},#{ave_daily_score},#{sub_last_score},#{ave_last_score},#{sub_all_score},#{ave_all_score})
+    </insert>
+    <select id="selectCount" resultType="Integer" parameterType="String">
+        select count(sclass) from student where sclass = #{sclass}
+    </select>
+    <select id="getAllTclassInformation" resultType="com.wzz.bean.PublicClass">
+        select * from public;
+    </select>
+    <select id="queryByCid" resultType="com.wzz.bean.PublicClass">
+        select * from public where cid = #{cid}
+    </select>
+    <delete id="deletePublicInformation">
+        delete from public where cid = #{cid}
+    </delete>
+    <update id="updateByCid" parameterType="com.wzz.bean.PublicClass">
+        update public set sclass = #{sclass},sub_daily_score = #{sub_daily_score},ave_daily_score=#{ave_daily_score},sub_last_score=#{sub_last_score},
+        ave_last_score=#{ave_last_score},sub_all_score=#{sub_all_score},ave_all_score=#{ave_all_score} where cid = #{cid}
+    </update>
+</mapper>

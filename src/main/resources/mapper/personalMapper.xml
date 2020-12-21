@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.wzz.seccond.personal.dao.InpersonalDao">
+
+    <select id="getAllPersonalInformation" resultType="com.wzz.bean.Personal">
+        select * from personal
+    </select>
+
+    <select id="getAllLesson" resultType="com.wzz.bean.Lesson">
+        select * from lesson
+    </select>
+
+    <select id="equalBySidAndLname" parameterType="com.wzz.bean.Personal" resultType="com.wzz.bean.Personal" >
+        select * from personal where sid = #{sid} and lname = #{lname}
+    </select>
+
+    <select id="queryBySid" resultType="com.wzz.bean.Personal">
+        select * from personal where sid = #{sid}
+    </select>
+    <insert id="toAddScore" parameterType="com.wzz.bean.Personal">
+        insert into personal(sid,sname,ssex,sclass,lname,daily_score,last_score,all_score) value (#{sid},#{sname},#{ssex},#{sclass},#{lname},#{daily_score},#{last_score},#{all_score})
+    </insert>
+    <update id="edit" parameterType="com.wzz.bean.Personal">
+        update personal set lname=#{lname},daily_score =#{daily_score},last_score=#{last_score},all_score=#{all_score} where sid = #{sid}
+    </update>
+    <delete id="delete">
+        delete from personal where sid = #{sid}
+    </delete>
+</mapper>

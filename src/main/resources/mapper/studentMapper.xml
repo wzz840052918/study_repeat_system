@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzz.seccond.student.dao.InStudentDao">
+    <resultMap id="student" type="com.wzz.bean.Student">
+        <id property="sid" column="sid"/>
+        <result property="sname" column="sname"/>
+        <result property="ssex" column="ssex"/>
+        <result property="colleage" column="colleage"/>
+        <result property="sclass" column="sclass"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+    <select id="getAllStudentInformation" resultMap="student">
+        select * from student;
+    </select>
+    <select id="queryStudentBysid" resultMap="student">
+        select * from student where sid = #{sid}
+    </select>
+    <insert id="addStudent" parameterType="com.wzz.bean.Student">
+        insert into student(sid,sname,ssex,colleage,sclass,phone) value (#{sid},#{sname},#{ssex},#{colleage},#{sclass},#{phone})
+    </insert>
+    <insert id="addStudentToPersonal" parameterType="com.wzz.bean.Student">
+        insert into personal(sid,sname,ssex,sclass) value (#{sid},#{sname},#{ssex},#{sclass})
+    </insert>
+    <update id="updateStudentInformationBysid" parameterType="com.wzz.bean.Student">
+        update student set sname = #{sname},colleage=#{colleage},sclass=#{sclass},phone=#{phone} where sid = #{sid}
+    </update>
+    <delete id="deleteStudentInformation">
+        delete from student where sid =#{sid}
+    </delete>
+    <delete id="deleteStudentInformationByArray">
+        delete from student where sid in
+        <foreach collection="array" item="sid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
+    </delete>
+</mapper>
